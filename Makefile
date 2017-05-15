@@ -6,7 +6,7 @@
 #    By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/22 18:35:41 by ilarbi            #+#    #+#              #
-#    Updated: 2017/05/15 12:02:40 by ilarbi           ###   ########.fr        #
+#    Updated: 2017/05/15 12:32:03 by ilarbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,12 +88,12 @@ NAME= libftprintf.a
 LIB= libft/libft.a utils/ft_printf.a
 
 all: $(NAME) 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(GARBAGE)
 	ar rc $(NAME) $^	
 $(OBJ): $(SUBDIR) $(INC)
 	gcc -c $(SRC)
-$(SUBDIR):
-	$(MAKE) -C $@ 
+$(SUBDIR): 
+	$(MAKE) -C $@
 utils: libft
 clean: 
 	rm -f $(OBJ)
