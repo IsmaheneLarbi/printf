@@ -6,7 +6,7 @@
 #    By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/22 18:35:41 by ilarbi            #+#    #+#              #
-#    Updated: 2017/05/15 12:32:03 by ilarbi           ###   ########.fr        #
+#    Updated: 2017/05/17 18:47:17 by ilarbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,15 +83,15 @@ GARBAGE= $(addprefix libft/,  ft_atoistr.o   \
 		 ft_swap.o) \
 		 $(addprefix utils/, ft_isflag.o  ft_iswidth.o  ft_islen.o  ft_istype.o  ft_checkforflags.o  ft_checkforwidth.o  ft_checkforlen.o ft_printformat.o)
 SUBDIR=libft utils
-.PHONY: $(SUBDIR)
+.PHONY: $(SUBDIR) all
 NAME= libftprintf.a
 LIB= libft/libft.a utils/ft_printf.a
 
 all: $(NAME) 
 $(NAME): $(OBJ) $(GARBAGE)
 	ar rc $(NAME) $^	
-$(OBJ): $(SUBDIR) $(INC)
-	gcc -c $(SRC)
+$(OBJ): | $(SUBDIR) $(INC)
+	gcc $(CFLAGS) -I $(INC) $(SRC)
 $(SUBDIR): 
 	$(MAKE) -C $@
 utils: libft
