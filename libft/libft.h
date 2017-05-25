@@ -6,13 +6,15 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 21:22:09 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/14 21:38:28 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/05/25 17:29:58 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LIBFT_H
 # define FT_LIBFT_H
 # include <string.h>
+# include <inttypes.h>
+# include <limits.h>
 
 typedef struct s_list	t_list;
 struct				s_list
@@ -24,7 +26,6 @@ struct				s_list
 
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstnew(void const *content, size_t content_size);
-void				ft_init(void **somethg, size_t size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *,
 			size_t));
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
@@ -54,6 +55,9 @@ void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 size_t				ft_strlen(const char *s);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
+int					ft_nbrsize(int number, int base);
+int					ft_nbrssize(intmax_t number, int base);
+int					ft_nbrusize(uintmax_t number, int base);
 int					ft_atoistr(const char **str);
 int					ft_isspace(int c);
 int					ft_strcmp(const char *s1, const char *s2);
@@ -77,7 +81,10 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_free(char *s1, int free1, char *s2, int free2);
 char				*ft_strtrim(char const *s);
+char				*ft_itoa_max_base(intmax_t number, int base);
+char				*ft_uitoa_max_base(uintmax_t number, int base);
 char				*ft_itoa(int n);
+char				*ft_itoa_base(int number, int base);
 char				**ft_strsplit(const char *s, char c);
 int					ft_atoi(const char *str);
 int					ft_isascii(int c);
