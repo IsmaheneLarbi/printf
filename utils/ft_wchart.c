@@ -6,12 +6,11 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 12:33:42 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/01 14:31:25 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/01 15:20:17 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wchar.h>
-#include <locale.h>
 #include "../ft_printf.h" 
 
 unsigned int	ft_power(unsigned int base, int ex)
@@ -53,15 +52,12 @@ char	*ft_wchart_to_bin(char *mask, char *number)
 		exit(-1);
 	size = ft_strlen(number) - 1;
 	szmask = ft_strlen(mask) - 1;
-	printf("size : %d\n", szmask + 1);
 	while (size >= -1 && szmask >= 0)
 	{
-		//((mask[szmask] == 'x' && size >= 0) ? (mask[szmask--] = number[size--]) : (szmask--));
 		if (size >= 0)
 			((mask[szmask] == 'x') ? (mask[szmask--] = number[size--]) : (szmask--));
 		if (size == -1 && szmask >= 0)
 			((mask[szmask] == 'x') ? (mask[szmask--] = '0') : (szmask--));
-		printf("mask renvoye %s | size mask : %d | size n :%d\n", mask, szmask + 1, size + 1);
 	}
 	return (mask);
 }
@@ -74,14 +70,15 @@ char	*ft_wchart(wchar_t	letter)
 
 	number = ft_itoa_base((int)letter, 2);
 	size = ft_strlen(number);
-	printf("%d\n", size);
-	if (size <= 7 && letter < 256)
+	if ((size <= 7 && letter < 128) || (letter < 256 && MB_CUR_MAX == 1))
 		return (number);
-	else if (size > 7 && size <= 11)
+	/*if (size <= 7 && letter >= 128 && letter < 256)
+		return ( (char *)letter);*/
+	else if (size > 7 && size <= 11 && MB_CUR_MAX != 1)
 		mask = ft_strdup("110xxxxx 10xxxxxx");
-	else if (size > 11 && size <= 16)
+	else if (size > 11 && size <= 16 & MB_CUR_MAX != 1)
 		mask = ft_strdup("1110xxxx 10xxxxxx 10xxxxxx");
-	else if (size > 16 && size <= 21)
+	else if (size > 16 && size <= 21 && MB_CUR_MAX != 1)
 		mask = ft_strdup("11110xxx 10xxxxxx 10xxxxxx 10xxxxxx");
 	else
 		exit(-1);
@@ -91,9 +88,9 @@ char	*ft_wchart(wchar_t	letter)
 int		main()
 {
 	
-	//int		i = 0;
+	int		i = 0;
 	int		size;
-	int		bits = ft_strlen(ft_itoa_base(193, 2));
+	int		bits = ft_strlen(ft_itoa_base(256, 2));
 	if (bits <= 7)
 		size = 1;
 	else if (bits <= 11)
@@ -104,8 +101,8 @@ int		main()
 		size = 4;
 	else
 		size = -1;
-	printf("%s\n", ft_wchart(193));
-	/*char	**n = ft_strsplit(ft_wchart(320), ' ');
+	printf("%s\n", ft_wchart(256));
+	char	**n = ft_strsplit(ft_wchart(256), ' ');
 	unsigned int	tab[size];
 	printf("size %d\n", size);
 	while (i < size)
@@ -113,6 +110,6 @@ int		main()
 		tab[i] = ft_bin_to_dec(n[i]);
 		write(1, &tab[i], 1);
 		i++;
-	}*/
+	}
 	return (0);
 }
