@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_bin_to_dec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/09 11:42:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/28 20:18:03 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/06/03 18:22:06 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/06/03 18:30:49 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+#include "libft.h"
+
+unsigned int	ft_bin_to_dec(char *bin)
 {
-	if (c >= 65 && c <= 90)
-		return (c - 65 + 97);
-	else
-		return (c);
+	int				i;
+	int				size;
+	unsigned int	result;
+
+	if (!bin)
+		exit(-1);
+	i = 0;
+	size = ft_strlen(bin) - 1;
+	result = 0;
+	while (i <= size)
+	{
+		result += ((bin[size - i] - 48) * ft_power(2, i));
+		i++;
+	}
+	return (result);
 }

@@ -6,16 +6,27 @@
 #    By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/09 11:58:56 by ilarbi            #+#    #+#              #
-#    Updated: 2017/05/14 23:01:58 by ilarbi           ###   ########.fr        #
+#    Updated: 2017/06/04 14:27:38 by ilarbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS=-c -Wall -Wextra -Werror
 NAME= libft.a
-SRC=  ft_atoistr.c \
-	 ft_init.c \
+SRC=  ft_putwchar.c \
+	  ft_wchart.c \
+	  ft_putwstr.c \
+	  ft_wstrlen.c \
+	  ft_power.c \
+	  ft_bin_to_dec.c \
+	  ft_nbrsize.c \
+	  ft_nbrssize.c \
+	  ft_nbrusize.c \
+	  ft_atoistr.c \
 	 ft_strjoin_free.c \
 	 ft_itoa.c \
+	 ft_itoa_base.c \
+	 ft_itoa_max_base.c \
+	 ft_uitoa_max_base.c \
 	 ft_lstmap.c \
 	 ft_lstadd.c \
 	 ft_lstdel.c \
@@ -74,12 +85,24 @@ SRC=  ft_atoistr.c \
 	 ft_strequ.c \
 	 ft_strnequ.c \
 	 ft_isspace.c \
-	 ft_swap.c
+	 ft_swap.c \
+	 ft_strminimalize.c
 
-OBJ= ft_atoistr.o \
-	 ft_init.o \
+OBJ= ft_wchart.o \
+	 ft_putwchar.o \
+	  ft_putwstr.o \
+	  ft_wstrlen.o \
+	 ft_power.o \
+	 ft_bin_to_dec.o \
+	 ft_nbrsize.o \
+	 ft_nbrssize.o \
+	 ft_nbrusize.o \
+	 ft_atoistr.o \
 	 ft_strjoin_free.o \
 	 ft_itoa.o \
+	 ft_itoa_base.o \
+	 ft_itoa_max_base.o \
+	 ft_uitoa_max_base.o \
 	 ft_lstmap.o \
 	 ft_lstadd.o \
 	 ft_lstdel.o \
@@ -138,7 +161,8 @@ OBJ= ft_atoistr.o \
 	 ft_strequ.o \
 	 ft_strnequ.o \
 	 ft_isspace.o \
-	 ft_swap.o
+	 ft_swap.o \
+	 ft_strminimalize.o
 
 INCLUDES= libft.h
 

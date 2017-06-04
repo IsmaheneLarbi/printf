@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 14:36:55 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/13 23:36:59 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/05/25 17:21:22 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int		ft_atoistr(const char **str)
 	i = 0;
 	result = 0;
 	isneg = 0;
-	while (*(*str) == ' ' || *(*str) == '\v' || *(*str) == '\t' || *(*str) == '\f'
-			|| *(*str) == '\r' || *(*str) == '\n')
+	while (*(*str) == ' ' || *(*str) == '\v' || *(*str) == '\t' ||
+		*(*str) == '\f' || *(*str) == '\r' || *(*str) == '\n')
 		(*str)++;
 	if (*(*str) == '-' || *(*str) == '+')
 	{
 		if (*(*str) == '-')
-		   isneg = 1;
+			isneg = 1;
 		(*str)++;
 	}
 	if (!ft_isdigit(*(*str)))
@@ -37,5 +37,5 @@ int		ft_atoistr(const char **str)
 		result = result * 10 + (*(*str) - '0');
 		(*str)++;
 	}
-	return ((isneg) ? -result : result);	
+	return ((isneg) ? -result : result);
 }

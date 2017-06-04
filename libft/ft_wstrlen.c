@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/09 11:42:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/28 20:18:03 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/06/03 19:00:34 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/06/03 19:01:21 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+#include <wchar.h>
+
+size_t	ft_wstrlen(wchar_t *s)
 {
-	if (c >= 65 && c <= 90)
-		return (c - 65 + 97);
-	else
-		return (c);
+	size_t	size;
+
+	size = 0;
+	while (*s++)
+		size++;
+	return (size);
 }

@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_nbrsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/09 11:42:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/28 20:18:03 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/05/25 17:09:10 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/05/25 17:16:46 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+#include "libft.h"
+
+int		ft_nbrsize(int number, int base)
 {
-	if (c >= 65 && c <= 90)
-		return (c - 65 + 97);
-	else
-		return (c);
+	int	size;
+
+	size = 0;
+	if (number == 0)
+		return (size++);
+	if (number < 0 && size++)
+		number = -number;
+	while (number > 0)
+	{
+		size++;
+		number /= base;
+	}
+	return (size);
 }

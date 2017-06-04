@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_strminimalize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/09 11:42:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/28 20:18:03 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/05/28 19:33:08 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/05/28 20:36:49 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+#include <stdlib.h>
+#include "libft.h"
+
+char	*ft_strminimalize(char **str)
 {
-	if (c >= 65 && c <= 90)
-		return (c - 65 + 97);
-	else
-		return (c);
+	int		i;
+
+	i = 0;
+	if (!str || !*str)
+		return (NULL);
+	while (*(*str + i))
+	{
+		*(*str + i) = ft_tolower(*(*str + i));
+		i++;
+	}
+	return (*str);
 }

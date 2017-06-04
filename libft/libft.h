@@ -6,12 +6,13 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 21:22:09 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/25 17:29:58 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/03 19:20:22 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LIBFT_H
 # define FT_LIBFT_H
+# include <stdlib.h>
 # include <string.h>
 # include <inttypes.h>
 # include <limits.h>
@@ -47,6 +48,8 @@ void				ft_bzero(void *s, size_t n);
 void				ft_swap(char **first, char **second);
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
+void				ft_putwchar(wchar_t letter);
+void				ft_putwstr(wchar_t *s);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putnbr(int n);
@@ -55,6 +58,7 @@ void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 size_t				ft_strlen(const char *s);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
+size_t				ft_wstrlen(wchar_t *s);
 int					ft_nbrsize(int number, int base);
 int					ft_nbrssize(intmax_t number, int base);
 int					ft_nbrusize(uintmax_t number, int base);
@@ -65,6 +69,8 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
+unsigned int		ft_power(unsigned int base, int ex);
+unsigned int		ft_bin_to_dec(char *bin);
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
@@ -85,6 +91,8 @@ char				*ft_itoa_max_base(intmax_t number, int base);
 char				*ft_uitoa_max_base(uintmax_t number, int base);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int number, int base);
+char				*ft_strminimalize(char **str);
+char				*ft_wchart(wchar_t letter);
 char				**ft_strsplit(const char *s, char c);
 int					ft_atoi(const char *str);
 int					ft_isascii(int c);

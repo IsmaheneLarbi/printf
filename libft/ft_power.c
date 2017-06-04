@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/09 11:42:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/28 20:18:03 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/06/03 18:23:01 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/06/03 18:23:47 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+unsigned int	ft_power(unsigned int base, int ex)
 {
-	if (c >= 65 && c <= 90)
-		return (c - 65 + 97);
-	else
-		return (c);
+	if (ex == 0)
+		return (1);
+	if (ex == 1)
+		return (base);
+	if (ex > 1)
+		return (base * ft_power(base, ex - 1));
+	return (-1);
 }
