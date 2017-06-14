@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cast_signed_z.c                                 :+:      :+:    :+:   */
+/*   ft_di.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/25 19:32:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/26 14:15:10 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/05/20 19:04:40 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/05/26 14:16:50 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../ft_printf.h"
-
-char	*ft_cast_signed_z(intmax_t result)
-{
-	ssize_t		z;
-	char		*number;
-
-	z = (ssize_t)result;
-	number = ft_itoa_max_base(z, 10);
-	return (number);
-}
+#include "ft_printf.h"
 /*
-int		main(void)
+ **itoa fait un malloc =>free
+ */
+char	*ft_di(t_format **f, intmax_t result, int *written)
 {
-	printf("%llu\n", SIZE_MAX);
-	printf("%s\n", ft_cast_signed_z(INTMAX_MAX));
-	return(0);
-}*/
+	char	res;
+	short	sh;
+	char	*ret;
+
+	if (!f || !*f)
+	   return (-1);	
+	if ((*f)->len && (*f)->len->hh)
+	{
+		res = (char)result;
+		ret = ft_itoa(res);
+		write(1, (char *)ret, 1); 
+		(*written++);
+	}
+	if ((*f)->len && (*f)->len->h)
+	{
+		sh = (short)result;
+
+	}
+}

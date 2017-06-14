@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cast_signed_z.c                                 :+:      :+:    :+:   */
+/*   ft_gettype.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/25 19:32:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/26 14:15:10 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/05/17 20:42:20 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/05/27 18:17:44 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "utils.h"
 #include "../ft_printf.h"
 
-char	*ft_cast_signed_z(intmax_t result)
+void	ft_gettype(const char **format, t_format **f)
 {
-	ssize_t		z;
-	char		*number;
-
-	z = (ssize_t)result;
-	number = ft_itoa_max_base(z, 10);
-	return (number);
+	if (!format || !*format || !f || !*f)
+		exit(-1) ;
+	if (*(*format) && ft_isok(*(*format)))
+	{
+		if (ft_istype(*(*format)))
+		{
+			(*f)->type = ft_strnew(1);
+			*((*f)->type) = *(*format);
+		}
+		if (*(*format) == '%')
+		{
+			//->padding(w, flags)
+			//->print, return
+		}	
+	}
+	else
+	{
+		ft_memdel((void **)f);
+		ft_putstr("no type\n");
+		exit(-1);
+	}
 }
-/*
-int		main(void)
-{
-	printf("%llu\n", SIZE_MAX);
-	printf("%s\n", ft_cast_signed_z(INTMAX_MAX));
-	return(0);
-}*/

@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cast_signed_z.c                                 :+:      :+:    :+:   */
+/*   ft_isunsigned.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/25 19:32:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/26 14:15:10 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/05/27 15:43:22 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/06/14 15:28:52 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../ft_printf.h"
 
-char	*ft_cast_signed_z(intmax_t result)
+int		ft_isunsigned(char type)
 {
-	ssize_t		z;
-	char		*number;
-
-	z = (ssize_t)result;
-	number = ft_itoa_max_base(z, 10);
-	return (number);
+	if (!type)
+		return (-1);
+	return ((ft_tolower(type) == 'o' || ft_tolower(type) == 'u' ||
+				ft_tolower(type) == 'x') ? 1 : 0);
 }
-/*
-int		main(void)
-{
-	printf("%llu\n", SIZE_MAX);
-	printf("%s\n", ft_cast_signed_z(INTMAX_MAX));
-	return(0);
-}*/

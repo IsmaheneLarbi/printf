@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cast_signed_z.c                                 :+:      :+:    :+:   */
+/*   ft_padandprint.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/25 19:32:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/26 14:15:10 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/06/08 14:22:07 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/06/14 17:32:30 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
-char	*ft_cast_signed_z(intmax_t result)
+void	ft_padandprint(char *str, t_format *f, int *written)
 {
-	ssize_t		z;
-	char		*number;
-
-	z = (ssize_t)result;
-	number = ft_itoa_max_base(z, 10);
-	return (number);
+	if (!str || !f || !written)
+		return ;
+	if (ft_tolower(*(f->type)) == 'd' || *(f->type) == 'i')
+	{	if (f->width && f->width->max == 0 && *str == '0')
+		{
+			ft_putchar(' ');
+			*written += 1;
+		}
+		else
+		{
+			ft_putstr(str);
+			*written += *written + ft_strlen(str);
+		}
+	}
 }
-/*
-int		main(void)
-{
-	printf("%llu\n", SIZE_MAX);
-	printf("%s\n", ft_cast_signed_z(INTMAX_MAX));
-	return(0);
-}*/

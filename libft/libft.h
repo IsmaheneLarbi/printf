@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 21:22:09 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/03 19:20:22 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/14 20:23:26 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_LIBFT_H
 # include <stdlib.h>
 # include <string.h>
+# include <unistd.h>
 # include <inttypes.h>
 # include <limits.h>
 

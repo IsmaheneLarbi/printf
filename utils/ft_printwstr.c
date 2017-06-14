@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cast_signed_z.c                                 :+:      :+:    :+:   */
+/*   ft_printwstr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/25 19:32:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/26 14:15:10 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/06/13 13:56:29 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/06/13 15:19:31 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../ft_printf.h"
 
-char	*ft_cast_signed_z(intmax_t result)
+int		ft_printwstr(wchar_t *wstr, int precision)
 {
-	ssize_t		z;
-	char		*number;
+	int		size;
+	int		sbyte;
 
-	z = (ssize_t)result;
-	number = ft_itoa_max_base(z, 10);
-	return (number);
+	size = 0;
+	sbyte = 0;
+	if (!wstr)
+		exit(-1);
+	while (*wstr)
+	{
+		sbyte = ft_wcsize(*wstr);
+		if ((size + sbyte) <= precision)
+		{
+			ft_putwchar(*wstr++);
+			size += sbyte;
+		}
+		else
+			break;	
+	}
+	return (size);
 }
-/*
-int		main(void)
-{
-	printf("%llu\n", SIZE_MAX);
-	printf("%s\n", ft_cast_signed_z(INTMAX_MAX));
-	return(0);
-}*/

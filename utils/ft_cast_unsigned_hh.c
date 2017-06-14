@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cast_signed_z.c                                 :+:      :+:    :+:   */
+/*   ft_cast_unsigned_hh.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/25 19:32:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/26 14:15:10 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/05/26 15:05:23 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/05/28 18:10:15 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../ft_printf.h"
 
-char	*ft_cast_signed_z(intmax_t result)
+char	*ft_cast_unsigned_hh(uintmax_t result, int base)
 {
-	ssize_t		z;
-	char		*number;
+	unsigned char	hhu;
+	char			*number;
 
-	z = (ssize_t)result;
-	number = ft_itoa_max_base(z, 10);
+	number = ft_strnew(1);
+	hhu = (unsigned char)result;
+	number = ft_uitoa_max_base(hhu, base);
 	return (number);
 }
-/*
-int		main(void)
-{
-	printf("%llu\n", SIZE_MAX);
-	printf("%s\n", ft_cast_signed_z(INTMAX_MAX));
-	return(0);
-}*/

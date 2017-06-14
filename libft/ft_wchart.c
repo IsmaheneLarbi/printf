@@ -6,43 +6,11 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 12:33:42 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/03 19:20:16 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/14 20:17:14 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <locale.h>
-#include <wchar.h>
 #include "../ft_printf.h" 
-
-unsigned int	ft_power(unsigned int base, int ex)
-{
-	if (ex == 0)
-		return (1);
-	if (ex == 1)
-		return (base);
-	if (ex > 1)
-		return (base * ft_power(base, ex - 1));
-	return (-1);
-}
-
-unsigned int	ft_bin_to_dec(char *bin)
-{
-	int				i;
-	int				size;
-	unsigned int	result;
-
-	if (!bin)
-		exit (-1);
-	i = 0;
-	size = ft_strlen(bin) - 1;
-	result = 0;
-	while (i <= size)
-	{
-		result += ((bin[size - i] - 48) * ft_power(2 , i));
-		i++;
-	}
-	return (result);	
-}
 
 char	*ft_wchart_to_bin(char *mask, char *number)
 {
@@ -69,49 +37,56 @@ char	*ft_wchart(wchar_t	letter)
 	char			*number;
 	char			*mask;
 
+
 	number = ft_itoa_base((wint_t)letter, 2);
 	size = ft_strlen(number);
-	if (size <= 7 && letter < 128)
-		return (number);
-	else if (MB_CUR_MAX == 1 && letter < 256)
-		return (ft_strdup((char *)&letter));
-	else if (size > 7 && size <= 11)
-		mask = ft_strdup("110xxxxx 10xxxxxx");
-	else if (size > 11 && size <= 16)
-		mask = ft_strdup("1110xxxx 10xxxxxx 10xxxxxx");
-	else if (size > 16 && size <= 21)
-		mask = ft_strdup("11110xxx 10xxxxxx 10xxxxxx 10xxxxxx");
-	else
-		exit(-1);
-	return (ft_wchart_to_bin(mask, number));
+	if (MB_CUR_MAX == 1)
+		return ((letter < 256) ? (number) : NULL);
+	else if (MB_CUR_MAX > 1)
+	{
+		if (size <= 7 && letter < 128)
+			return (number);
+		else if (size > 7 && size <= 11)
+			mask = ft_strdup("110xxxxx 10xxxxxx");
+		else if (size > 11 && size <= 16)
+			mask = ft_strdup("1110xxxx 10xxxxxx 10xxxxxx");
+		else if (size > 16 && size <= 21)
+			mask = ft_strdup("11110xxx 10xxxxxx 10xxxxxx 10xxxxxx");
+		else
+			exit(-1);
+		return (ft_wchart_to_bin(mask, number));
+	}
+	return (NULL);
 }
+/*
+int		*ft_wc(char *letter)
+{
+	int		i;
+	int		*tab;
+	char	**wc;
+
+	i = 0;
+	wc = ft_strsplit(letter, ' ');
+	if (!(tab = (int *)malloc(sizeof(int) * 4)))
+		exit(-1);
+	while (wc[i])
+	{
+		tab[i] = (int)malloc(sizeof(int));
+		tab[i] = ft_bin_to_dec(wc[i]);
+		i++;
+	}
+	return (tab);
+}*/
 /*
 int		main()
 {
-	
-	int		i = 0;
-	int		size;
-	int		bits = ft_strlen(ft_itoa_base(257, 2));
-	if (bits <= 7)
-		size = 1;
-	else if (bits <= 11)
-		size = 2;
-	else if(bits <= 16)
-		size = 3;
-	else if (bits <= 21)
-		size = 4;
-	else
-		size = -1;
-	printf("size %d\n", size);
-	printf("%s\n", ft_wchart(257));
-	char	**n = ft_strsplit(ft_wchart(257), ' ');
-	unsigned int	tab[size];
-	while (i < size)
-	{
-		tab[i] = ft_bin_to_dec(n[i]);
-		write(1, &tab[i], 1);
-		i++;
-	}
-	write(1, "\n", 1);
+	int	*tab;
+	int	i = 0;
+
+	//setlocale(LC_ALL, "");
+	printf("printf : [%lc]\n", 185);
+	tab = ft_wc(ft_wchart(185));
+	while (i < 4)
+		write(1, &tab[i++], 1);
 	return (0);
 }*/

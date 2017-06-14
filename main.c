@@ -1,32 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/03 23:04:07 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/14 19:10:40 by ilarbi           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdio.h>
+#include <locale.h>
 #include "ft_printf.h"
 
-int		main(void)
+int		main()
 {
-	char *format = "+- 10.20ld";
-	t_format f = ft_memalloc(sizeof(t_format));
-	//long d = 123456789012;
-	//ft_putnbr(printf("%-010%%ld\n", d));   
-	//ft_putnbr(printf("%10%%ld\n", d));   
-	//ft_putnbr(printf("%010%%ld\n", d));   
-	//ft_putnbr(printf("%-10%%ld\n", d));   
-	//ft_putnbr(printf("% -+10.20ld\n", d));   
-	//ft_putnbr(printf("% -+10.20l\n", d));   
-	ft_checkforflags(&format, &f);
-	ft_checkforwidth(&format, &f);
-	ft_checkforlen(&format, &f);
-	ft_printformat(f);
+	wchar_t *wstr = L"لكمنهسزرذدخحجغففللنيء؟؛ونقففغ";
+	setlocale(LC_ALL, "");
+	ft_putnbr(printf("%60ls\n", wstr));
+	//ft_putnbr(ft_printwstr(wstr, 4));
 	return (0);
 }

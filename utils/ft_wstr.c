@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cast_signed_z.c                                 :+:      :+:    :+:   */
+/*   ft_wstr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/25 19:32:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/26 14:15:10 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/06/02 13:54:16 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/06/08 14:57:41 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../ft_printf.h"
 
-char	*ft_cast_signed_z(intmax_t result)
+char	*ft_wstr(wchar_t *ws)
 {
-	ssize_t		z;
-	char		*number;
+	char	*str;
+	char	*(*fptr)(wchar_t);
+	wchar_t	*cur;
 
-	z = (ssize_t)result;
-	number = ft_itoa_max_base(z, 10);
-	return (number);
+	if (!(str = ft_memalloc(1024)))
+		exit(-1);
+	fptr = &ft_wchart;
+	cur = ws;
+	if (!ws)
+		exit(-1);
+	while (*cur)
+		ft_strjoin_free(str, 1, (fptr)(*cur++), 1);
+	return (str);
 }
 /*
-int		main(void)
+int		main()
 {
-	printf("%llu\n", SIZE_MAX);
-	printf("%s\n", ft_cast_signed_z(INTMAX_MAX));
-	return(0);
+	wchar_t	*s = L"我是一只猫。";
+	while (*s)
+		ft_putwchar(*s++);
+	return (0);
 }*/

@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cast_signed_z.c                                 :+:      :+:    :+:   */
+/*   ft_wcsize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/25 19:32:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/26 14:15:10 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/06/03 18:10:29 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/06/13 14:13:24 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../ft_printf.h"
 
-char	*ft_cast_signed_z(intmax_t result)
+int		ft_wcsize(wchar_t letter)
 {
-	ssize_t		z;
-	char		*number;
+	int		bits;
 
-	z = (ssize_t)result;
-	number = ft_itoa_max_base(z, 10);
-	return (number);
+	bits = ft_strlen(ft_itoa_base((wint_t)letter, 2));
+	if (bits <= 7)
+		return (1);
+    else if (bits <= 11)
+		return (2);
+    else if (bits <= 16)
+		return (3);
+    else if (bits <= 21)
+		return (4);
+    else
+		return (-1);	
 }
-/*
-int		main(void)
-{
-	printf("%llu\n", SIZE_MAX);
-	printf("%s\n", ft_cast_signed_z(INTMAX_MAX));
-	return(0);
-}*/

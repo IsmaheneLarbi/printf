@@ -6,16 +6,17 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/13 23:21:07 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/14 19:58:07 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/14 11:36:01 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "utils.h"
 
 /*
- **if width < var len => ignore written += var len
- **else written += width
- **start printing according to flags : spaces, signs...
+**if width < var len => ignore written += var len
+**else written += width
+**start printing according to flags : spaces, signs...
 */
 
 void	ft_checkforwidth(const char **format, t_format **f)
