@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 18:49:21 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/14 20:23:02 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/16 11:11:56 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*ft_wc(char *letter)
 	char	**wc;
 
 	i = 0;
-	printf("%s\n", letter);
+	if (!letter)
+		return (NULL);
 	wc = ft_strsplit(letter, ' ');
 	if (!(tab = (char *)malloc(sizeof(char) * 4)))
 		exit(-1);
@@ -38,10 +39,10 @@ int		main()
 {
 	char *tab;
 	int	i = 0;
-	int size = ft_wcsize(985);
+	int size = ft_wcsize(129);
 	setlocale(LC_ALL, "");
-	printf("printf : [%lc]\n", 985);
-	tab = ft_wc(ft_wchart(985));
+	printf("printf : [%lc]\n", 129);
+	tab = ft_wc(ft_wchart(129));
 	while (i < size)
 		write(1, &tab[i++], 1);
 	return (0);

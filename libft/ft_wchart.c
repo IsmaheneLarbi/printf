@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 12:33:42 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/14 20:17:14 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/16 12:36:35 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ char	*ft_wchart(wchar_t	letter)
 	char			*number;
 	char			*mask;
 
-
-	number = ft_itoa_base((wint_t)letter, 2);
+	number = ft_itoa_base((int)letter, 2);
 	size = ft_strlen(number);
 	if (MB_CUR_MAX == 1)
 		return ((letter < 256) ? (number) : NULL);

@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 18:58:49 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/17 22:28:02 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/16 12:07:41 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,10 @@ void	ft_printformat(t_format *f)
 		ft_putnbr(f->len->ll);ft_printf("  |  ");
 		ft_putnbr(f->len->j);ft_printf("  |  ");
 		ft_putnbr(f->len->z);ft_printf("\n");
+	}
+	if (f->type)
+	{
+		ft_printf("************************type******************************\n");
+		ft_putstr(f->type);
 	}
 }

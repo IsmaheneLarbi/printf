@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 14:48:04 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/14 20:27:13 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/16 14:05:02 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ char	*ft_convert(const char **format, int *written, ...)
 	va_start(ap, written);
 	f = ft_parse(format);
 	number = NULL;
-	if (f->type && ft_issigned(*(f->type)) 
-		&& (!f->len || (f->len && (f->len->hh || f->len->h))))
-				number = ft_cast_signed(va_arg(ap, intmax_t), f);
+	if (f->type && *(f->type) == 'p')
+		ft_redirect_p(&f);
+	if (f->type && ft_issigned(*(f->type)))
+		number = ft_cast_signed(va_arg(ap, intmax_t), f);
 	else if (f->type && ft_isunsigned(*(f->type)))
-		number = ft_uitoa_max_base(va_arg(ap, uintmax_t), ft_assign_base(f));
+		number = ft_cast_unsigned(va_arg(ap, uintmax_t), f);
 	else if (f->type && (ft_tolower(*(f->type)) == 'c'))
 		number = ft_chartostr(va_arg(ap, intmax_t), f);
 	else if (f->type && (ft_tolower(*(f->type)) == 's'))
