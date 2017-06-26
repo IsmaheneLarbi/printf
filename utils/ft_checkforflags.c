@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/13 17:16:42 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/16 13:24:32 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/24 14:16:20 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,4 @@ void	ft_checkforflags(const char **format, t_format **f)
 			(*f)->flags->space = 1;
 		(*format)++;
 	}
-	(((*f)->flags->plus && (*f)->flags->space) ? (*f)->flags->space = 0 : 0);
-	(((*f)->flags->minus && (*f)->flags->zero) ? (*f)->flags->zero = 0 : 0);
 }

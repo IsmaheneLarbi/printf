@@ -6,10 +6,11 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/14 18:16:09 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/13 13:34:25 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/24 14:13:31 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "utils.h"
 
 /*
@@ -39,10 +40,10 @@ void	ft_checkforlen(const char **format, t_format **f)
 	}
 	else if (*(*format + 2) && ft_isok(*(*format + 2)))
 	{
-		((ft_strncmp(*format, "hh", 2)) ? ((*f)->len->hh = 1) : 0);
-		((ft_strncmp(*format, "ll", 2)) ? ((*f)->len->ll = 1) : 0);
+		((!ft_strncmp(*format, "hh", 2)) ? ((*f)->len->hh = 1) : 0);
+		((!ft_strncmp(*format, "ll", 2)) ? ((*f)->len->ll = 1) : 0);
 		(((*f)->len->hh || (*f)->len->ll) ? (*format) += 2 : 0);
 	}
 	else
-		exit(-1);
+		return ;
 }

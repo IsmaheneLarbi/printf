@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/14 19:50:34 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/14 20:04:43 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/24 15:49:30 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,17 @@ int		ft_isnumeric(char type);
 int		ft_assign_base(t_format *f);
 int		ft_wcsize(wchar_t letter);
 int		ft_printwstr(wchar_t *wstr, int precision);
+int		ft_wstrbytes(wchar_t *wstr, int precision);
+int		ft_check(t_format **f);
 void	ft_checkforflags(const char **format, t_format **f);
 void	ft_checkforwidth(const char **format, t_format **f);
 void	ft_checkforlen(const char **format, t_format **f);
 void	ft_gettype(const char **format, t_format **f);
-void	ft_check(t_format *f);
 void	ft_printformat(t_format *f);
-char	*ft_cast_signed(intmax_t result, t_format *f);
+void	ft_fdel(t_format **f);
+char	*ft_redirect_p(t_format **f, void *address, int *size);
+char	*ft_percent(t_format **f, int *size);
+char	*ft_cast_signed(void *result, t_format *f, int *size);
 char	*ft_cast_signed_(intmax_t result);
 char	*ft_cast_signed_hh(intmax_t result);
 char	*ft_cast_signed_h(intmax_t result);
@@ -45,7 +49,7 @@ char	*ft_cast_signed_l(intmax_t result);
 char	*ft_cast_signed_ll(intmax_t result);
 char	*ft_cast_signed_j(intmax_t result);
 char	*ft_cast_signed_z(intmax_t result);
-char	*ft_cast_unsigned(uintmax_t result, t_format *f);
+char	*ft_cast_unsigned(void *result, t_format *f, int *size);
 char	*ft_cast_unsigned_(uintmax_t result, int base);
 char	*ft_cast_unsigned_hh(uintmax_t result, int base);
 char	*ft_cast_unsigned_h(uintmax_t result, int base);
@@ -54,8 +58,8 @@ char	*ft_cast_unsigned_ll(uintmax_t result, int base);
 char	*ft_cast_unsigned_j(uintmax_t result, int base);
 char	*ft_cast_unsigned_z(uintmax_t result, int base);
 char	*ft_wstr(wchar_t *ws);
-char	*ft_chartostr(intmax_t result, t_format *f);
-char	*ft_wstrtostr(void *str, t_format *f);
+char	*ft_chartostr(intmax_t result, t_format *f, int *size);
+char	*ft_wstrtostr(void *str, t_format *f, int *size);
 
 struct			s_flags
 {

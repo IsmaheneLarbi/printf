@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 21:22:09 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/14 20:23:26 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/22 18:45:50 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char				*ft_itoa(int n);
 char				*ft_itoa_base(int number, int base);
 char				*ft_strminimalize(char **str);
 char				*ft_wchart(wchar_t letter);
+char				*ft_wc(char *letter);
 char				**ft_strsplit(const char *s, char c);
 int					ft_atoi(const char *str);
 int					ft_isascii(int c);

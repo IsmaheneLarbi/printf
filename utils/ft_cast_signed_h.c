@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 16:30:01 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/26 14:14:35 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/20 19:31:47 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ char	*ft_cast_signed_h(intmax_t result)
 {
 	short	sh;
 	char	*number;
-	
-	sh = (short)result;
-	number = ft_itoa_max_base(sh, 10);
+
+	sh = (int)result;
+	if (sh < SHRT_MIN || sh > SHRT_MAX)
+		return (NULL);
+	number = ft_itoa(sh);
 	return (number);
 }
 /*

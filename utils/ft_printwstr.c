@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 13:56:29 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/13 15:19:31 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/24 18:11:55 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_printwstr(wchar_t *wstr, int precision)
 	size = 0;
 	sbyte = 0;
 	if (!wstr)
-		exit(-1);
+		return(-1);
 	while (*wstr)
 	{
 		sbyte = ft_wcsize(*wstr);

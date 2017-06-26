@@ -6,40 +6,39 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 14:48:04 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/16 14:05:02 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/26 15:29:08 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "utils/utils.h"
+#include <locale.h>
 #include "ft_printf.h"
-/*
-void	ft_getvar()
-{
-	
-}
-*/
-char	*ft_convert(const char **format, int *written, ...)
+
+char	*ft_convert(const char **format, int *written, va_list ap)
 {
 	t_format	*f;
+	int			size;
 	char		*number;
-	va_list		ap;
 
-	va_start(ap, written);
-	f = ft_parse(format);
 	number = NULL;
-	if (f->type && *(f->type) == 'p')
-		ft_redirect_p(&f);
-	if (f->type && ft_issigned(*(f->type)))
-		number = ft_cast_signed(va_arg(ap, intmax_t), f);
-	else if (f->type && ft_isunsigned(*(f->type)))
-		number = ft_cast_unsigned(va_arg(ap, uintmax_t), f);
-	else if (f->type && (ft_tolower(*(f->type)) == 'c'))
-		number = ft_chartostr(va_arg(ap, intmax_t), f);
-	else if (f->type && (ft_tolower(*(f->type)) == 's'))
-		number = ft_wstrtostr(va_arg(ap, void *), f);
-	ft_padandprint(number, f, written);
-	va_end(ap);
+	size = 0;
+	f = ft_parse(format);
+	if (*(f->type) == '%')
+		number = ft_percent(&f, &size);
+	else if (*(f->type) == 'p')
+		number = ft_redirect_p(&f, va_arg(ap, void*), &size);
+	else if (ft_issigned(*(f->type)))
+		number = ft_cast_signed((void *)va_arg(ap, intmax_t), f, &size);
+	else if (ft_isunsigned(*(f->type)))
+		number = ft_cast_unsigned((void*)va_arg(ap, uintmax_t), f, &size);
+	else if (ft_tolower(*(f->type)) == 'c')
+		number = ft_chartostr((int)va_arg(ap, intmax_t), f, &size);
+	else if (ft_tolower(*(f->type)) == 's')
+		number = ft_wstrtostr((char *)va_arg(ap, void *), f, &size);
+	if (f->width && f->width->max == 0 && ((ft_isnumeric(*(f->type)) 
+		&& (!(ft_strcmp(number, "0")))) || ft_tolower(*(f->type)) == 's'))
+		size = 0;
+	ft_padandprint(&number, &f, written, &size);
 	//memdel(&f);
 	return (number);
 }
@@ -47,11 +46,17 @@ char	*ft_convert(const char **format, int *written, ...)
 int		main()
 {
 	int			written = 0;
-	//short		D = 2147;
-	const char	*format = "1.lc";
-	
-	ft_convert(&format, &written, 945);
-	//printf("wr : %d\n", written);
+	//setlocale(LC_ALL, "");
+	//long long	D = -2147;
+	char c = 'A';
+//	wchar_t c = 945;
+	const char	*format = "c";
+	//printf("%-1%");
+	//printf("printf %#10lx\n", (unsigned long)&c );
+	//printf("printf %20p\n", &c );
+	ft_convert(&format, &written, c);
+//	printf("printf : [%p]", &c);
 	//ft_putnbr(printf("%D\n", 2147));
 	return (0);
-}*/
+}
+*/

@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 15:47:11 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/16 12:46:57 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/26 16:07:35 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_cast_unsigned_(uintmax_t result, int base)
 	char		*number;
 
 	u = (unsigned)result;
+	//if (u > UINT_MAX)
+	//	return (NULL);
 	number = ft_uitoa_max_base(u, base);
 	return (number);
 }

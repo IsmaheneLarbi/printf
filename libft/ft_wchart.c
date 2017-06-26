@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 12:33:42 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/16 12:36:35 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/24 19:21:59 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ char	*ft_wchart(wchar_t	letter)
 	number = ft_itoa_base((int)letter, 2);
 	size = ft_strlen(number);
 	if (MB_CUR_MAX == 1)
-		return ((letter < 256) ? (number) : NULL);
+		return ((letter >= 0 && letter < 256) ? (number) : NULL);
 	else if (MB_CUR_MAX > 1)
 	{
 		if (size <= 7 && letter < 128)
+		{
+			printf("mb >1 wcg=hart\n");
 			return (number);
+		}
 		else if (size > 7 && size <= 11)
 			mask = ft_strdup("110xxxxx 10xxxxxx");
 		else if (size > 11 && size <= 16)

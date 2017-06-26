@@ -6,7 +6,7 @@
 #    By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/09 11:58:56 by ilarbi            #+#    #+#              #
-#    Updated: 2017/06/14 20:20:19 by ilarbi           ###   ########.fr        #
+#    Updated: 2017/06/22 18:47:41 by ilarbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,8 @@ SRC=  ft_putwchar.c \
 	 ft_strnequ.c \
 	 ft_isspace.c \
 	 ft_swap.c \
-	 ft_strminimalize.c
+	 ft_strminimalize.c \
+	 ft_wc.c
 
 OBJ= ft_wchart.o \
 	 ft_putwchar.o \
@@ -162,7 +163,8 @@ OBJ= ft_wchart.o \
 	 ft_strnequ.o \
 	 ft_isspace.o \
 	 ft_swap.o \
-	 ft_strminimalize.o
+	 ft_strminimalize.o \
+	 ft_wc.o
 
 INCLUDES= libft.h
 

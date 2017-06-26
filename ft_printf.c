@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 21:55:07 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/16 14:05:48 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/26 16:12:42 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@
 int		ft_printf(const char *format, ...)
 {
 	int		written;
+	va_list ap;
 
+	if (!format)
+		return (-1);
 	written = 0;
-	while (format && *format)
+	va_start(ap, format);
+	while (*format)
 	{
 		if (*format != '%')
 		{
@@ -30,9 +34,21 @@ int		ft_printf(const char *format, ...)
 		}
 		else if (*format == '%' && format++)
 		{	
-			ft_convert(&format, &written);
+			ft_convert(&format, &written, ap);
 			format++;
 		}
 	}
+	va_end(ap);
 	return (written);
 }
+
+int		main()
+{
+//	char *str = "abc";/
+	ft_printf("%+u", UINT_MAX);
+	//printf("\n%  %");
+	//ft_putnbr(ft_printf("%010d", -145));
+	//printf("%010d", -145);
+	return (0);
+}
+

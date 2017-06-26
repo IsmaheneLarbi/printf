@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 18:49:21 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/16 11:11:56 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/24 19:21:43 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ char	*ft_wc(char *letter)
 	{
 		tab[i] = (char)malloc(sizeof(char));
 		tab[i] = ft_bin_to_dec(wc[i]);
+		free(wc[i]);
 		i++;
 	}
+	free(wc);
 	return (tab);
 }
-
+/*
 int		main()
 {
 	char *tab;
@@ -46,4 +48,4 @@ int		main()
 	while (i < size)
 		write(1, &tab[i++], 1);
 	return (0);
-}
+}*/
