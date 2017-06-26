@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 21:55:07 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/26 16:12:42 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/26 22:30:40 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ int		ft_printf(const char *format, ...)
 int		main()
 {
 //	char *str = "abc";/
-	ft_printf("%+u", UINT_MAX);
-	//printf("\n%  %");
+	//ft_printf("%+u", UINT_MAX);
+	ft_printf("@moulitest: %5.o %5.0o", 0, 0);
+	//ft_printf("%.10s est une phrase\n", "");
+//	printf("%10s est une phrase\n", "");
 	//ft_putnbr(ft_printf("%010d", -145));
 	//printf("%010d", -145);
 	return (0);

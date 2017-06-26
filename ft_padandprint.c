@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:22:07 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/26 15:44:36 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/26 22:33:15 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		ft_pad(char *str, t_format *f, int size, int fldsize)
 {
 	int		pad;
 	
-	if (!size || !f)
+	if (!f)
 		return (0);
 	pad = 0;
 	if (f->width  && f->width->min > fldsize)
@@ -98,7 +98,7 @@ void	ft_padandprint(char **str, t_format **f, int *written, int *sz)
 	int		pmin;
 	char	pad[2];
 
-	if (!*f || (!sz) || !written)
+	if (!*f || !written)
 		return ;
 	fldsize = ft_fldsize(*f, *sz);
 	pmin = ft_pad(*str, *f, *sz, fldsize);
@@ -115,7 +115,7 @@ void	ft_padandprint(char **str, t_format **f, int *written, int *sz)
 	ft_printsign(str, f, written);
 	if (pad[0] == 'r' && pad[1] == '0')
 		ft_prepend(pad[1], pmin, written);
-	if ((*f)->flags && (*f)->flags->hash)
+	if ((*f)->flags && (*f)->flags->hash && *(*str) != '0')
 		ft_prepend(*((*f)->type), 1, written);
 	if (fldsize > *sz)	
 		ft_prepend('0', fldsize - *sz, written);

@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 16:09:48 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/26 12:52:22 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/26 21:47:01 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,12 @@ char	*ft_cast_signed(void* result, t_format *f, int *size)
 		number = ft_cast_signed_j((intmax_t)result);
 	else if (f->len->z) 
 		number = ft_cast_signed_z((long long)result);
-	*size = ((*number == '-') ? (ft_strlen(number) - 1) : (ft_strlen(number)));
+	if (!result && f->width && ((!f->width->max) || 
+				(f->width->precision && f->width->max == -1)))
+		*size = 0;
+	else
+		*size = ((*number == '-') ? (ft_strlen(number) - 1) 
+				: (ft_strlen(number)));
 	return (number);
 }
 /*
