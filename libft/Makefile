@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CFLAGS=-c -Wall -Wextra -Werror
-NAME= libft.a
+NAME= ./libft.a
 SRC=  ft_putwchar.c \
 	  ft_wchart.c \
 	  ft_putwstr.c \
@@ -88,7 +88,6 @@ SRC=  ft_putwchar.c \
 	 ft_swap.c \
 	 ft_strminimalize.c \
 	 ft_wc.c
-
 OBJ= ft_wchart.o \
 	 ft_putwchar.o \
 	  ft_putwstr.o \
@@ -165,7 +164,6 @@ OBJ= ft_wchart.o \
 	 ft_swap.o \
 	 ft_strminimalize.o \
 	 ft_wc.o
-
 INCLUDES= libft.h
 
 all: $(NAME)

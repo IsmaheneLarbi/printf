@@ -18,8 +18,8 @@ int		ft_nbrsize(int number, int base)
 
 	size = 0;
 	if (number == 0)
-		return (size++);
-	if (number < 0 && size++)
+		return (++size);
+	if (number < 0 && (size += 1))
 		number = -number;
 	while (number > 0)
 	{

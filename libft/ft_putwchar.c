@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/03 17:47:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/16 11:10:50 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/16 21:32:45 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_putwchar(wchar_t letter)
 
 	i = 0;
 	wc = ft_strsplit(ft_wchart(letter), ' ');
-	if ((MB_CUR_MAX == 1 && letter > 256))
 	if ((MB_CUR_MAX == 1 && letter < 256) || (MB_CUR_MAX > 1 && letter < 128))
 	{
 		write(1, (char *)&letter, 1);

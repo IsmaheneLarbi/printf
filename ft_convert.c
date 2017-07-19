@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 14:48:04 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/26 21:13:17 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/19 21:50:03 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*ft_convert(const char **format, int *written, va_list ap)
 	number = NULL;
 	size = 0;
 	f = ft_parse(format);
+	if (!f)//plus tard, enlever pad print er retour null se fera naturellement
+		return(NULL);
 	if (*(f->type) == '%')
 		number = ft_percent(&f, &size);
 	else if (*(f->type) == 'p')
@@ -35,14 +37,8 @@ char	*ft_convert(const char **format, int *written, va_list ap)
 		number = ft_chartostr((int)va_arg(ap, intmax_t), f, &size);
 	else if (ft_tolower(*(f->type)) == 's')
 		number = ft_wstrtostr((char *)va_arg(ap, void *), f, &size);
-	/*if (f->width && f->width->max == 0 && ((ft_isnumeric(*(f->type)) 
-		&& (!(ft_strcmp(number, "0")))) || ft_tolower(*(f->type)) == 's'))
-	{
-		//ft_putstr("size 0");
-		//size = 0;
-	}*/
-	ft_padandprint(&number, &f, written, &size);
-	//memdel(&f);
+	//ft_padandprint(&number, &f, written, &size);
+	//ft_fdel(&f);
 	return (number);
 }
 /*

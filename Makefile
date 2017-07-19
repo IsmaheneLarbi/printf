@@ -6,7 +6,7 @@
 #    By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/22 18:35:41 by ilarbi            #+#    #+#              #
-#    Updated: 2017/06/13 14:44:27 by ilarbi           ###   ########.fr        #
+#    Updated: 2017/07/19 22:46:19 by ilarbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,21 @@ CFLAGS= -c -Wall -Wextra -Werror
 INC=utils/utils.h  
 SRC= ft_parse.c \
 	 ft_convert.c \
+	 ft_padandprint.c \
 	 ft_printf.c
 OBJ= ft_parse.o \
 	 ft_convert.o \
+	 ft_padandprint.o \
 	 ft_printf.o
-GARBAGE= $(addprefix libft/,  ft_atoistr.o   \
-		 ft_init.o   \
+GARBAGE= $(addprefix libft/, ft_wc.o ft_strminimalize.o ft_putwchar.o ft_wchart.o ft_putwstr.o ft_wstrlen.o ft_power.o ft_bin_to_dec.o ft_atoistr.o   \
 		 ft_strjoin_free.o   \
 		 ft_itoa.o   \
+		 ft_nbrsize.o \
+		 ft_nbrssize.o \
+		 ft_nbrusize.o \
+		 ft_itoa_base.o   \
+		 ft_itoa_max_base.o \
+		 ft_uitoa_max_base.o \
 		 ft_lstmap.o   \
 		 ft_lstadd.o   \
 		 ft_lstdel.o   \
@@ -81,11 +88,11 @@ GARBAGE= $(addprefix libft/,  ft_atoistr.o   \
 		 ft_strnequ.o   \
 		 ft_isspace.o   \
 		 ft_swap.o) \
-		 $(addprefix utils/, ft_isflag.o  ft_iswidth.o  ft_islen.o  ft_istype.o  ft_checkforflags.o  ft_checkforwidth.o  ft_checkforlen.o ft_printformat.o)
+		 $(addprefix utils/, ft_isflag.o  ft_iswidth.o  ft_islen.o  ft_istype.o  ft_isok.o ft_isunsigned.o ft_checkforflags.o  ft_checkforwidth.o  ft_checkforlen.o ft_check.o ft_printformat.o ft_assign_base.o ft_gettype.o ft_redirect_p.o ft_cast_signed.o ft_cast_signed_.o ft_cast_signed_hh.o ft_cast_signed_h.o ft_cast_signed_l.o ft_cast_signed_ll.o ft_cast_signed_j.o ft_cast_signed_z.o ft_cast_unsigned.o ft_issigned.o ft_isnumeric.o ft_cast_unsigned.o ft_cast_unsigned_.o ft_cast_unsigned_hh.o ft_cast_unsigned_h.o ft_cast_unsigned_l.o ft_cast_unsigned_ll.o ft_cast_unsigned_j.o ft_cast_unsigned_z.o ft_chartostr.o ft_wstrtostr.o ft_wstr.o ft_wcsize.o ft_printwstr.o ft_wstrbytes.o ft_percent.o ft_fdel.o)
 SUBDIR=libft utils
 .PHONY: $(SUBDIR) all
 NAME= libftprintf.a
-LIB= libft/libft.a utils/ft_printf.a
+LIB= libft/libft.a utils/libutils.a
 
 all: $(NAME) 
 $(NAME): $(OBJ) $(GARBAGE)
@@ -96,8 +103,7 @@ $(SUBDIR):
 	$(MAKE) -C $@
 utils: libft
 clean: 
-	rm -f $(OBJ)
-	rm -f $(GARBAGE)
+	rm -f $(OBJ) $(GARBAGE)
 fclean: clean
 	rm -rf $(LIB) $(NAME)
 re: fclean all

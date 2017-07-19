@@ -6,28 +6,11 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 23:21:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/25 22:38:13 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/06/29 17:36:46 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-
-int		ft_nbrsize(int number, int base)
-{
-	int		size;
-
-	size = 0;
-	if (number == 0)
-		return (++size);
-	if (number < 0 && (size += 1))
-		number = -number;
-	while (number > 0)
-	{
-		size++;
-		number /= base;
-	}
-	return (size);
-}
+#include "libft.h"
 
 char	*ft_itoa_base(int number, int base)
 {
@@ -40,7 +23,10 @@ char	*ft_itoa_base(int number, int base)
 	i = 0;
 	size = ft_nbrsize(number, base);
 	if (base == 10 && number == INT_MIN)
-		return (ft_strdup("–2147483648"));
+	{
+		result = ft_strdup("-2147483648");
+		return (result);
+	}
 	if (base == 10 && number < 0 && (flag = 1))
 		number *= (-1);
 	if (!(result = ft_strnew(size)))

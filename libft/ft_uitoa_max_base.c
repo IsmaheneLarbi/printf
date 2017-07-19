@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-
+/*
 int		ft_nbrusize(uintmax_t number, int base)
 {
 	int		size;
@@ -26,7 +26,7 @@ int		ft_nbrusize(uintmax_t number, int base)
 	}
 	return (size);
 }
-
+*/
 char	*ft_uitoa_max_base(uintmax_t number, int base)
 {
 	int		size;

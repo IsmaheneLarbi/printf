@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 17:09:10 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/25 17:28:31 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/18 14:46:23 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int		ft_nbrssize(intmax_t number, int base)
 
 	size = 0;
 	if (number == 0)
-		return (size++);
-	if (number < 0 && size++)
+		return (++size);
+	if (number < 0 && (size += 1))
 		number = -number;
 	while (number > 0)
 	{

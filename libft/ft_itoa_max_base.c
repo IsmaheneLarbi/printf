@@ -6,12 +6,12 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 23:21:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/05/28 19:33:02 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/18 14:44:37 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <stdio.h>
 #include "libft.h"
-
+/*
 int		ft_nbrssize(intmax_t number, int base)
 {
 	int		size;
@@ -28,7 +28,7 @@ int		ft_nbrssize(intmax_t number, int base)
 	}
 	return (size);
 }
-
+*/
 char	*ft_itoa_max_base(intmax_t number, int base)
 {
 	int		size;

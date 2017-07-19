@@ -6,13 +6,13 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 14:25:55 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/24 19:24:00 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/19 20:26:24 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-char	*ft_chartostr(intmax_t result, t_format *f, int *size)
+char	*ft_chartostr(int result, t_format *f, int *size)
 {
 	char	*c;
 
@@ -21,9 +21,10 @@ char	*ft_chartostr(intmax_t result, t_format *f, int *size)
 		return (NULL);
 	if (!f || !size)
 		return (NULL);
-	if ((f->len || *(f->type) == 'C') && (result < INT_MIN || result > INT_MAX))
+	if ((f->len || *(f->type) == 'C' || *(f->type) == 'S') 
+		&& (result < INT_MIN || result > INT_MAX))
 	   return (NULL);
-	if (result > 127 && (f->len || *(f->type) == 'C'))
+	if (result > 127 && (f->len || *(f->type) == 'C' || *(f->type) == 'S'))
 	{
 		c = ft_wc(ft_wchart(result));
 		*size = ft_wcsize(result);//ft_wstrbytes

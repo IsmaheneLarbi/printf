@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/14 19:50:34 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/24 15:49:30 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/18 13:16:45 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_fdel(t_format **f);
 char	*ft_redirect_p(t_format **f, void *address, int *size);
 char	*ft_percent(t_format **f, int *size);
 char	*ft_cast_signed(void *result, t_format *f, int *size);
-char	*ft_cast_signed_(intmax_t result);
+char	*ft_cast_signed_(int result);
 char	*ft_cast_signed_hh(intmax_t result);
 char	*ft_cast_signed_h(intmax_t result);
 char	*ft_cast_signed_l(intmax_t result);
@@ -57,8 +57,8 @@ char	*ft_cast_unsigned_l(uintmax_t result, int base);
 char	*ft_cast_unsigned_ll(uintmax_t result, int base);
 char	*ft_cast_unsigned_j(uintmax_t result, int base);
 char	*ft_cast_unsigned_z(uintmax_t result, int base);
-char	*ft_wstr(wchar_t *ws);
-char	*ft_chartostr(intmax_t result, t_format *f, int *size);
+char	*ft_wstr(wchar_t *ws, t_format *f, int *size);
+char	*ft_chartostr(int result, t_format *f, int *size);
 char	*ft_wstrtostr(void *str, t_format *f, int *size);
 
 struct			s_flags

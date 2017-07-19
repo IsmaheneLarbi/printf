@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:22:07 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/26 22:33:15 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/19 22:37:26 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int		ft_fldsize(t_format *f, int size)
 	fldsize = size;
 	if (f->width && f->width->max >= 0)
 	{
-		fldsize = ((f->width->max > size) ? f->width->max : size);
-   		if (*(f->type) == 'o')
+		fldsize = ((f->width->max > size && ft_isnumeric(*(f->type))) ? f->width->max : size);
+   		if (*(f->type) == 'o' && f->flags && f->flags->hash && f->width->min > size)
 			((fldsize > size) ? fldsize : fldsize++);
 	}
 	return (fldsize);
@@ -81,8 +81,8 @@ void	ft_printsign(char **str, t_format **f, int *written)
 
 	if (!*str || !*f || !written || !((*f)->type))
 		return ;
-	if (*(*str) == '-' || ((*f)->flags 
-				&& ((*f)->flags->plus || (*f)->flags->space)))
+	if (ft_issigned(*((*f)->type)) && (*(*str) == '-' || ((*f)->flags 
+				&& ((*f)->flags->plus || (*f)->flags->space))))
 	{
 		((*(*str) == '-') ? (sign = '-') : 0);
 		if ((*f)->flags && !sign 
@@ -96,12 +96,14 @@ void	ft_padandprint(char **str, t_format **f, int *written, int *sz)
 {
 	int		fldsize;
 	int		pmin;
+	int		padded;
 	char	pad[2];
 
 	if (!*f || !written)
 		return ;
 	fldsize = ft_fldsize(*f, *sz);
 	pmin = ft_pad(*str, *f, *sz, fldsize);
+	padded = 0;
 	pad[0] = 'r';
 	pad[1] = ' ';
 	if ((*f)->width && (*f)->width->min > fldsize)
@@ -109,20 +111,21 @@ void	ft_padandprint(char **str, t_format **f, int *written, int *sz)
 		if ((*f)->flags && ((*f)->flags->zero || (*f)->flags->minus))
 			(((*f)->flags->minus) ? (pad[0] = 'l') 
 			 : (pad[1] = '0'));
-		if (pad[0] == 'r' && pad[1] == ' ')
+		if (pad[0] == 'r' && pad[1] == ' ' && !padded && (padded = 1))
 			ft_prepend(pad[1], pmin, written);
 	}
 	ft_printsign(str, f, written);
-	if (pad[0] == 'r' && pad[1] == '0')
+	if (pad[0] == 'r' && pad[1] == '0' && ft_tolower(*((*f)->type)) != 'x' && !padded && (padded = 1))
 		ft_prepend(pad[1], pmin, written);
 	if ((*f)->flags && (*f)->flags->hash && *(*str) != '0')
 		ft_prepend(*((*f)->type), 1, written);
-	if (fldsize > *sz)	
-		ft_prepend('0', fldsize - *sz, written);
-	((*(*str) == '-') ? write(1, *str + 1, *sz) : write(1, *str, *sz));
+	if (ft_isnumeric(*((*f)->type)) && (fldsize > *sz || ((*f)->flags && (*f)->flags->zero && pmin && !padded && (padded = 1))))	
+		((fldsize > *sz) ? (ft_prepend('0', fldsize - *sz, written)) : (ft_prepend('0', pmin, written)));
+	((ft_issigned(*((*f)->type)) && *(*str) == '-' && *sz) ? write(1, *str + 1, *sz) : write(1, *str, *sz));
 	*written += *sz;
-	if ((*f)->width && (*f)->width->min > fldsize && pad[0] == 'l')
-		ft_prepend(pad[1], pmin, written);
+	//printf("[pad wr : %d | char (%c) | size : %d]", *written , *(*str), *sz);
+	if ((*f)->width && (*f)->width->min > fldsize && pad[0] == 'l' && !padded && (padded = 1))
+			ft_prepend(pad[1], pmin, written);
 }
 /*
 int		main()
