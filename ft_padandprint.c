@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:22:07 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/19 22:37:26 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/26 21:42:51 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ int		ft_pad(char *str, t_format *f, int size, int fldsize)
 				&& f->flags->hash)
 			  pad -= 1;
 		}	
-		if (ft_tolower(*(f->type)) == 'x' && f->flags && f->flags->hash)
+		if ((ft_tolower(*(f->type)) == 'x' && f->flags && f->flags->hash && *str != '0') || (*(f->type) == 'p')) 
 			pad -= 2;
 		if (ft_isnumeric(*(f->type)) && (*str == '-' 
 			|| (f->flags && (f->flags->space || f->flags->plus))))
 			pad -= 1;
 	}
-	return (pad);
+	return ((pad > 0) ? pad : 0);
 }
 
 void	ft_printsign(char **str, t_format **f, int *written)
@@ -106,6 +106,7 @@ void	ft_padandprint(char **str, t_format **f, int *written, int *sz)
 	padded = 0;
 	pad[0] = 'r';
 	pad[1] = ' ';
+	//printf("pmin %d sz %d str %s\n", pmin, *sz, *str);
 	if ((*f)->width && (*f)->width->min > fldsize)
 	{
 		if ((*f)->flags && ((*f)->flags->zero || (*f)->flags->minus))
@@ -115,6 +116,8 @@ void	ft_padandprint(char **str, t_format **f, int *written, int *sz)
 			ft_prepend(pad[1], pmin, written);
 	}
 	ft_printsign(str, f, written);
+	if (*((*f)->type) == 'p')
+		ft_prepend('x', 2, written);
 	if (pad[0] == 'r' && pad[1] == '0' && ft_tolower(*((*f)->type)) != 'x' && !padded && (padded = 1))
 		ft_prepend(pad[1], pmin, written);
 	if ((*f)->flags && (*f)->flags->hash && *(*str) != '0')
@@ -123,9 +126,8 @@ void	ft_padandprint(char **str, t_format **f, int *written, int *sz)
 		((fldsize > *sz) ? (ft_prepend('0', fldsize - *sz, written)) : (ft_prepend('0', pmin, written)));
 	((ft_issigned(*((*f)->type)) && *(*str) == '-' && *sz) ? write(1, *str + 1, *sz) : write(1, *str, *sz));
 	*written += *sz;
-	//printf("[pad wr : %d | char (%c) | size : %d]", *written , *(*str), *sz);
 	if ((*f)->width && (*f)->width->min > fldsize && pad[0] == 'l' && !padded && (padded = 1))
-			ft_prepend(pad[1], pmin, written);
+		ft_prepend(pad[1], pmin, written);
 }
 /*
 int		main()

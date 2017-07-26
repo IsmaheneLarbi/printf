@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_invalid_type.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/09 18:02:00 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/26 20:16:42 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/07/21 13:47:31 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/07/21 13:56:06 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include "../ft_printf.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_invalid_type(char *pseudotype, int *size)
 {
-	int		i;
-	int		j;
-	char	*copy;
+	char	*invalid;
 
-	i = 0;
-	j = 0;
-	while (s1[i])
-		i++;
-	copy = (char*)malloc(sizeof(char) * (i + 1));
-	ft_memset(copy, 0, (size_t)(i + 1));
-	if (copy == NULL)
-		return (copy);
-	while (j < i)
-	{
-		copy[j] = s1[j];
-		j++;
-	}
-	copy[i] = '\0';
-	return (copy);
+	if (!(invalid = ft_strnew(1)) || !pseudotype)
+		return (NULL);
+	ft_strncpy(invalid, pseudotype, 1);
+	*size = 1;
+	return (invalid);
 }

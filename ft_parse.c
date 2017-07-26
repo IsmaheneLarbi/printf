@@ -6,13 +6,13 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 21:41:15 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/19 22:41:00 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/26 19:31:46 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <stdio.h>
 #include "ft_printf.h"
 
-t_format	*ft_parse(const char **format)
+t_format	*ft_parse(const char **format, int *written)
 {
 	t_format	*f;
 
@@ -23,11 +23,16 @@ t_format	*ft_parse(const char **format)
 	ft_checkforlen(format, &f);
 	ft_gettype(format, &f);
 	//ft_printformat(f);
-	if (!ft_check(&f))
+	//printf("parse | ft_check result : %d | f : %p\n", ft_check(&f), f);
+	if (f && f->type && ft_isok(*(f->type)) && !ft_check(&f))
 	{
-		if (f)
-			ft_fdel(&f);
+	//	printf("parse | wr : %d | f : %p\n", *written, f);
+		if (ft_istype(*(f->type)))//UB
+			*written = -1;
+		ft_fdel(&f);
 		f = NULL;
+
 	}
+	//printf("parse | f : %p\n", f);
 	return (f);
 }

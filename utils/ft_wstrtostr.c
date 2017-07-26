@@ -6,21 +6,22 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/03 19:47:36 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/19 21:48:52 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/26 20:15:56 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "../ft_printf.h"
 
 char	*ft_wstrtostr(void *str, t_format *f, int *size)
 {
 	char *s;
 
-	if (!f || (f->len && !(f->len->l)))
+	s = NULL;
+	if (!f)
 		exit(-1);
 	if (!str && (*size = ft_strlen("(null)")))
-		return (s = ft_strdup("(null)"));
-	s = NULL;
+		return ((s = ft_strdup("(null)")));
 	if ((f->len && f->len->l) || (*(f->type) == 'S'))
 	{
 		s = ft_wstr((wchar_t *)str, f, size);

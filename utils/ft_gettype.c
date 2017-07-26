@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/17 20:42:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/18 13:46:48 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/26 15:17:14 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	ft_gettype(const char **format, t_format **f)
 		ft_fdel(f);
 		exit(0);
 	}
-	if (*(*format) && ft_isok(*(*format)))
+	if (*(*format)) //&& ft_isok(*(*format)))
 	{
 		(*f)->type = ft_strnew(1);
 		*((*f)->type) = *(*format);
 	}
 	else
 	{
-		ft_memdel((void **)f);
+		ft_memdel((void **)f);//moulitest 50 {%10R}
 		//exit(-1);
 		return ;
 	}

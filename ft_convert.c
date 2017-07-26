@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 14:48:04 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/19 21:50:03 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/26 20:17:02 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_convert(const char **format, int *written, va_list ap)
 
 	number = NULL;
 	size = 0;
-	f = ft_parse(format);
+	f = ft_parse(format, written);
 	if (!f)//plus tard, enlever pad print er retour null se fera naturellement
 		return(NULL);
 	if (*(f->type) == '%')
@@ -37,7 +37,9 @@ char	*ft_convert(const char **format, int *written, va_list ap)
 		number = ft_chartostr((int)va_arg(ap, intmax_t), f, &size);
 	else if (ft_tolower(*(f->type)) == 's')
 		number = ft_wstrtostr((char *)va_arg(ap, void *), f, &size);
-	//ft_padandprint(&number, &f, written, &size);
+	else
+		number = ft_invalid_type(f->type, &size);
+	ft_padandprint(&number, &f, written, &size);
 	//ft_fdel(&f);
 	return (number);
 }
