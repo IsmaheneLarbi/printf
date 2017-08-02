@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 11:21:30 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/26 21:51:25 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/27 16:42:44 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		ft_check(t_format **f)
 		(*f)->flags->space = 0;
 	if (ft_isunsigned(*((*f)->type)) && (*f)->flags && (*f)->flags->plus)
 		(*f)->flags->plus = 0;
+	if ((*f)->width && (*f)->width->precision && ((*f)->width->max == -1) && (ft_tolower(*((*f)->type)) == 's' || (*((*f)->type) == 'p')) )
+		(*f)->width->max = 0; 
 	if ((*f)->flags)
 	{
 		(((*f)->flags->plus && (*f)->flags->space) ? (*f)->flags->space = 0 : 0);

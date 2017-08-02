@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/17 20:42:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/26 15:17:14 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/02 19:38:08 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_gettype(const char **format, t_format **f)
 {
 	if (!*format || !*f)
 	{
-		ft_putstr("end\n");
 		ft_fdel(f);
 		exit(0);
 	}

@@ -6,10 +6,11 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 19:31:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/16 18:49:57 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/07/27 14:03:06 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "../ft_printf.h"
 
 int		ft_wstrbytes(wchar_t *wstr, int precision)

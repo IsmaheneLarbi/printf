@@ -6,10 +6,11 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 13:54:16 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/19 21:47:57 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/02 20:51:36 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "../ft_printf.h"
 
 void	ft_freewc(char **wc)
@@ -29,7 +30,7 @@ char	*ft_wstr(wchar_t *ws, t_format *f, int *size)
 	char	*(*fptr)(wchar_t, t_format *, int *);
 	wchar_t	*cur;
 
-	if (!(str = ft_memalloc(1)))
+	if (!(str = ft_strnew(1)))
 		exit(-1);
 	cur = ws;
 	fptr = &ft_chartostr;
@@ -37,7 +38,11 @@ char	*ft_wstr(wchar_t *ws, t_format *f, int *size)
 		exit(-1);
 	while (*cur)
 	{
-		str = ft_strjoin_free(str, 1, (fptr)(*cur++, f, size), 1);
+		//ft_putstr("boucle \n");
+		//ft_printf("*cur [%d]", *cur);
+		str = ft_strjoin_free(str, 1, (fptr)(*cur, f, size), 0);
+		cur++;
+		//ft_printf("[%s]\n", str);
 	}
 	return (str);
 }

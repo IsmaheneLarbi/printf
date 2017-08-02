@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 14:48:04 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/26 20:17:02 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/02 21:21:13 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	*ft_convert(const char **format, int *written, va_list ap)
 	else
 		number = ft_invalid_type(f->type, &size);
 	ft_padandprint(&number, &f, written, &size);
-	//ft_fdel(&f);
+	ft_fdel(&f);
+	//((number) ? ft_strdel(&number) : 0);
 	return (number);
 }
 /*

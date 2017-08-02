@@ -6,11 +6,10 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/03 19:47:36 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/26 20:15:56 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/02 20:58:55 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../ft_printf.h"
 
 char	*ft_wstrtostr(void *str, t_format *f, int *size)
@@ -18,24 +17,25 @@ char	*ft_wstrtostr(void *str, t_format *f, int *size)
 	char *s;
 
 	s = NULL;
-	if (!f)
-		exit(-1);
-	if (!str && (*size = ft_strlen("(null)")))
+	((!f) ? exit(-1) : 0);
+	if (!str)
+	{
+		(*size = ((f->width) ? (f->width->max) : ft_strlen("(null)")));
 		return ((s = ft_strdup("(null)")));
+	}
 	if ((f->len && f->len->l) || (*(f->type) == 'S'))
 	{
 		s = ft_wstr((wchar_t *)str, f, size);
-		*size = ((f->width && f->width->max > 0 
-				&& f->width->max < (int)ft_strlen(s)) 
-				? ft_wstrbytes((wchar_t *)str, f->width->max)
-				: ft_strlen(s));
+		*size = ((s && f->width && f->width->max >= 0
+				&& f->width->max < (int)ft_strlen(s))
+				? ft_wstrbytes((wchar_t *)str, f->width->max) : ft_strlen(s));
 	}
 	if (!(f->len) && (*(f->type) == 's'))
 	{
 		s = ft_strnew(ft_strlen((char *)str));
 		ft_strcpy(s, str);
-		*size = ((f->width && f->width->max >= 0 
-				&& ((int)ft_strlen(s) > f->width->max)) 
+		*size = ((s && f->width && f->width->max >= 0
+				&& ((int)ft_strlen(s) > f->width->max))
 				? f->width->max : ft_strlen(s));
 	}
 	return (s);
