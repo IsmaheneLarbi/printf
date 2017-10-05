@@ -6,7 +6,7 @@
 #    By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/22 18:35:41 by ilarbi            #+#    #+#              #
-#    Updated: 2017/09/14 18:10:38 by ilarbi           ###   ########.fr        #
+#    Updated: 2017/10/05 19:02:08 by ilarbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJ= ft_parse.o \
 	 ft_convert.o \
 	 ft_padandprint.o \
 	 ft_printf.o
-GARBAGE= $(addprefix libft/, ft_wc.o ft_strminimalize.o ft_putwchar.o ft_wchart.o ft_putwstr.o ft_wstrlen.o ft_power.o ft_bin_to_dec.o ft_atoistr.o   \
+GARBAGE= $(addprefix libft/, ft_htoi.o ft_abs.o ft_wc.o ft_strminimalize.o ft_putwchar.o ft_wchart.o ft_putwstr.o ft_wstrlen.o ft_power.o ft_bin_to_dec.o ft_atoistr.o   \
 		 ft_strjoin_free.o   \
 		 ft_itoa.o   \
 		 ft_nbrsize.o \

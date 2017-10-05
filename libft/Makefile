@@ -6,13 +6,16 @@
 #    By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/09 11:58:56 by ilarbi            #+#    #+#              #
-#    Updated: 2017/08/26 18:05:03 by ilarbi           ###   ########.fr        #
+#    Updated: 2017/10/05 19:02:32 by ilarbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS=-c -Wall -Wextra -Werror
 NAME= ./libft.a
-SRC=  ft_putc.c \
+SRC=  get_next_line.c \
+	  ft_htoi.c \
+	  ft_abs.c \
+	  ft_putc.c \
 	  ft_putwchar.c \
 	  ft_wchart.c \
 	  ft_putwstr.c \
@@ -89,7 +92,10 @@ SRC=  ft_putc.c \
 	 ft_swap.c \
 	 ft_strminimalize.c \
 	 ft_wc.c
-OBJ= ft_putc.o \
+OBJ= get_next_line.o \
+	 ft_htoi.o \
+	 ft_abs.o \
+	 ft_putc.o \
 	 ft_wchart.o \
 	 ft_putwchar.o \
 	  ft_putwstr.o \

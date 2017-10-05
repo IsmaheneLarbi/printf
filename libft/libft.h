@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 21:22:09 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/08/26 19:46:11 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/10/05 18:18:37 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,27 @@
 # include <unistd.h>
 # include <inttypes.h>
 # include <limits.h>
+# include <sys/types.h>
+# include <fcntl.h>
+# define BUFF_SIZE 10
+# define OPEN_MAX sysconf(_SC_OPEN_MAX)
 
 typedef struct s_list	t_list;
+typedef	struct s_file	t_file;
 struct				s_list
 {
 	void			*content;
 	size_t			content_size;
 	t_list			*next;
+};
+
+struct				s_file
+{
+	int			ret;
+	char		*rest;
+	char		*tmp2;
+	char		tmp1[BUFF_SIZE + 1];
+	int			oldfd;
 };
 
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
@@ -71,8 +85,11 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
+int					get_next_line(const int fd, char **line);
 unsigned int		ft_power(unsigned int base, int ex);
 unsigned int		ft_bin_to_dec(char *bin);
+unsigned int		ft_abs(int number);
+unsigned int		ft_htoi(char *hex);
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
