@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 17:54:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/18 12:53:48 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/27 21:05:45 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,19 @@
 # include "libft/libft.h"
 # include "utils/utils.h"
 
-t_format	*ft_parse(const char **format);
-char		*ft_convert(const char **format, int *written, va_list ap);
+typedef	struct s_pad	t_pad;
+struct		s_pad
+{
+	int		fldsize;
+	int		pmin;
+	int		padded;
+	int		sz;
+	char	pad[2];
+};
+
+t_format	*ft_parse(const char **format, int *written);
+int			ft_convert(const char **format, int *written,
+			va_list ap, char **number);
 void		ft_padandprint(char **str, t_format **f, int *written, int *size);
 int			ft_printf(const char *format, ...);
 

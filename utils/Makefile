@@ -6,7 +6,7 @@
 #    By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/14 19:21:35 by ilarbi            #+#    #+#              #
-#    Updated: 2017/06/24 14:19:05 by ilarbi           ###   ########.fr        #
+#    Updated: 2017/08/26 20:47:29 by ilarbi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,9 @@ SRC= ft_fdel.c \
 	 ft_cast_unsigned_ll.c \
 	 ft_cast_unsigned_j.c \
 	 ft_cast_unsigned_z.c \
-	 ft_wstr.c
+	 ft_wstr.c \
+	 ft_prepend.c \
+	 ft_invalid_type.c
 OBJ=ft_fdel.o \
 	ft_percent.o \
 	ft_printwstr.o \
@@ -94,7 +96,9 @@ OBJ=ft_fdel.o \
 	ft_cast_unsigned_ll.o \
 	ft_cast_unsigned_j.o \
 	ft_cast_unsigned_z.o \
-	ft_wstr.o
+	ft_wstr.o \
+	ft_prepend.o \
+	ft_invalid_type.o
 all: $(NAME)
 $(NAME): $(OBJ) $(GBG)
 	ar rc $(NAME) $^

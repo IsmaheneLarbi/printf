@@ -6,27 +6,12 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 23:21:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/21 19:15:47 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/22 13:44:34 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-/*
-int		ft_nbrusize(uintmax_t number, int base)
-{
-	int		size;
 
-	size = 0;
-	if (number == 0)
-		return (++size);
-	while (number > 0)
-	{
-		size++;
-		number /= base;
-	}
-	return (size);
-}
-*/
 char	*ft_uitoa_max_base(uintmax_t number, int base)
 {
 	int		size;

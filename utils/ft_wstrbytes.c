@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 19:31:33 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/27 14:03:06 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/22 13:56:06 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_wstrbytes(wchar_t *wstr, int precision)
 		if ((size + sbyte) <= precision)
 			size += sbyte;
 		else
-			break;
+			break ;
 	}
 	return (size);
 }

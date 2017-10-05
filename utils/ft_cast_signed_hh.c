@@ -6,11 +6,10 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 16:10:17 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/26 20:46:00 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/22 14:29:25 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../ft_printf.h"
 
 char	*ft_cast_signed_hh(intmax_t result)
@@ -19,18 +18,6 @@ char	*ft_cast_signed_hh(intmax_t result)
 	char	*number;
 
 	hhd = (signed char)result;
-//	if (hhd < CHAR_MIN || hhd > CHAR_MAX)
-//		return (NULL);
-	number	= ft_itoa(hhd);
+	number = ft_itoa(hhd);
 	return (number);
 }
-/*
-int		main(void)
-{
-	char	*c;
-	intmax_t t = -128;
-
-	c = ft_cast_signed_hh(t);
-	printf("%c\n", *c);
-	return (0);
-}*/

@@ -1,0 +1,10 @@
+
+*.o
+
+.ft_lstmap.c.swo
+
+*.swp
+
+*.swo
+
+*.o

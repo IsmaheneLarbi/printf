@@ -6,15 +6,16 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 18:49:21 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/19 22:45:04 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/27 22:49:56 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
 /*
-**wc = pourquoi allouer 4? allouer wcsize
+**wc = allouer wcsize
 */
+
 char	*ft_wc(char *letter)
 {
 	int		i;
@@ -25,12 +26,14 @@ char	*ft_wc(char *letter)
 	if (!letter)
 		return (NULL);
 	wc = ft_strsplit(letter, ' ');
-	free(letter);
-	if (!(tab = (char *)malloc(sizeof(char) * 4)))
+	while (wc[i])
+		i++;
+	if (!(tab = (char *)ft_memalloc(sizeof(char) * (i + 1))))
 		exit(-1);
+	i = 0;
+	free(letter);
 	while (wc[i])
 	{
-		tab[i] = (char)malloc(sizeof(char));
 		tab[i] = ft_bin_to_dec(wc[i]);
 		free(wc[i]);
 		i++;

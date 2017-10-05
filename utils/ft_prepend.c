@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printformat.c                                   :+:      :+:    :+:   */
+/*   ft_prepend.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/08 18:58:49 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/08/22 16:14:59 by ilarbi           ###   ########.fr       */
+/*   Created: 2017/08/26 20:45:19 by ilarbi            #+#    #+#             */
+/*   Updated: 2017/08/26 20:46:13 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void	ft_printformat(t_format *f)
+void	ft_prepend(char c, int nbr, int *written)
 {
-	if (!f)
-		return ;
+	int		i;
+
+	i = 0;
+	if (c == 'x')
+		write(1, "0x", (nbr = 2));
+	else if (c == 'X')
+		write(1, "0X", (nbr = 2));
+	else if (ft_tolower(c) == 'o')
+		write(1, "0", (nbr = 1));
+	else
+	{
+		while (i++ < nbr)
+			write(1, &c, 1);
+	}
+	*written += nbr;
 }

@@ -6,12 +6,11 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 12:33:42 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/19 20:03:19 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/09/03 11:51:52 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../ft_printf.h" 
+#include "../ft_printf.h"
 
 char	*ft_wchart_to_bin(char **mask, char **number)
 {
@@ -25,8 +24,8 @@ char	*ft_wchart_to_bin(char **mask, char **number)
 	while (size >= -1 && szmask >= 0)
 	{
 		if (size >= 0)
-			(((*mask)[szmask] == 'x') ? ((*mask)[szmask--] = (*number)[size--]) :
-			 (szmask--));
+			(((*mask)[szmask] == 'x') ? ((*mask)[szmask--] = (*number)[size--])
+			: (szmask--));
 		if (size == -1 && szmask >= 0)
 			(((*mask)[szmask] == 'x') ? ((*mask)[szmask--] = '0') : (szmask--));
 	}
@@ -34,18 +33,19 @@ char	*ft_wchart_to_bin(char **mask, char **number)
 	return (*mask);
 }
 
-char	*ft_wchart(wchar_t	letter)
+char	*ft_wchart(wchar_t letter)
 {
 	int				size;
 	char			*number;
 	char			*mask;
 
-	number = ft_itoa_base((int)letter, 2);
-	size = ft_strlen(number);
 	if (MB_CUR_MAX == 1)
-		return ((letter >= 0 && letter < 256) ? (number) : NULL);
+		return ((letter >= 0 && letter < 256)
+				? (ft_itoa_base((int)letter, 2)) : NULL);
 	else if (MB_CUR_MAX > 1)
 	{
+		number = ft_itoa_base((int)letter, 2);
+		size = ft_strlen(number);
 		if (size <= 7 && letter < 128)
 			return (number);
 		else if (size > 7 && size <= 11)
@@ -61,22 +61,3 @@ char	*ft_wchart(wchar_t	letter)
 	}
 	return (NULL);
 }
-/*
-int		*ft_wc(char *letter)
-{
-	int		i;
-	int		*tab;
-	char	**wc;
-
-	i = 0;
-	wc = ft_strsplit(letter, ' ');
-	if (!(tab = (int *)malloc(sizeof(int) * 4)))
-		exit(-1);
-	while (wc[i])
-	{
-		tab[i] = (int)malloc(sizeof(int));
-		tab[i] = ft_bin_to_dec(wc[i]);
-		i++;
-	}
-	return (tab);
-}*/

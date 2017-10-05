@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/24 14:17:17 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/08/02 21:16:51 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/22 17:54:59 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void		ft_fdel(t_format **f)
 		free((*f)->width);
 	if ((*f)->len)
 		free((*f)->len);
+	if ((*f)->type)
+		free((*f)->type);
 	free(*f);
-	//exit(-1);
+	f = NULL;
 }

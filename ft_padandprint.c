@@ -6,70 +6,50 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:22:07 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/08/02 21:18:56 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/09/03 11:19:19 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ft_printf.h"
 
 int		ft_fldsize(t_format *f, int size)
 {
 	int		fldsize;
-	
+
 	if (!f)
 		return (-1);
 	fldsize = size;
 	if (f->width && f->width->max >= 0)
 	{
-		fldsize = ((f->width->max > size && (ft_isnumeric(*(f->type)) 
+		fldsize = ((f->width->max > size && (ft_isnumeric(*(f->type))
 			|| (*(f->type) == 'p'))) ? f->width->max : size);
-   		if (*(f->type) == 'o' && f->flags && f->flags->hash && f->width->min > size)
+		if (*(f->type) == 'o' && f->flags &&
+			f->flags->hash && f->width->min > size)
 			((fldsize > size) ? fldsize : fldsize++);
 	}
 	return (fldsize);
 }
 
-void	ft_prepend(char c, int nbr, int *written)
-{
-	int		i;
-
-	i = 0;
-	if (c == 'x')
-		write(1, "0x", (nbr = 2));
-	else if (c == 'X')
-		write(1, "0X", (nbr = 2));
-	else if (ft_tolower(c) == 'o')
-		write(1, "0", (nbr = 1));
-	else
-	{
-		while (i++ < nbr)
-			write(1, &c, 1);
-	}
-	*written += nbr;
-}
-
 int		ft_pad(char *str, t_format *f, int size, int fldsize)
 {
 	int		pad;
-	
+
 	if (!f)
 		return (0);
 	pad = 0;
-	if (f->width  && f->width->min > fldsize)
+	if (f->width && f->width->min > fldsize)
 	{
 		pad = f->width->min - fldsize;
-
-		if (size > f->width->max) // fldsize = taille
+		if (size > f->width->max)
 		{
-			if (ft_tolower(*(f->type)) == 'o' && f->flags 
+			if (ft_tolower(*(f->type)) == 'o' && f->flags
 				&& f->flags->hash)
-			  pad -= 1;
-		}	
-		if ((ft_tolower(*(f->type)) == 'x' && f->flags 
-				&& f->flags->hash && *str != '0') || (*(f->type) == 'p')) 
+				pad -= 1;
+		}
+		if ((ft_tolower(*(f->type)) == 'x' && f->flags
+				&& f->flags->hash && *str != '0') || (*(f->type) == 'p'))
 			pad -= 2;
-		if (ft_isnumeric(*(f->type)) && (*str == '-' 
+		if (ft_isnumeric(*(f->type)) && (*str == '-'
 			|| (f->flags && (f->flags->space || f->flags->plus))))
 			pad -= 1;
 	}
@@ -83,80 +63,65 @@ void	ft_printsign(char **str, t_format **f, int *written)
 	sign = '\0';
 	if (!*str || !*f || !written || !((*f)->type))
 		return ;
-	if (ft_issigned(*((*f)->type)) && (*(*str) == '-' || ((*f)->flags 
+	if (ft_issigned(*((*f)->type)) && (*(*str) == '-' || ((*f)->flags
 				&& ((*f)->flags->plus || (*f)->flags->space))))
 	{
 		((*(*str) == '-') ? (sign = '-') : 0);
-		if ((*f)->flags && !sign 
+		if ((*f)->flags && !sign
 			&& ((*f)->flags->plus || (*f)->flags->space))
-			(((*f)->flags->plus) ? (sign = '+') : (sign = ' '));
+			sign = (((*f)->flags->plus) ? '+' : ' ');
 		ft_prepend(sign, 1, written);
 	}
 }
 
+t_pad	*ft_initpad(char **str, t_format *f, int *written, int *sz)
+{
+	t_pad	*p;
+
+	if (!f || !written || !sz || !(p = (t_pad *)malloc(sizeof(t_pad))))
+		return (NULL);
+	p->sz = *sz;
+	p->fldsize = ft_fldsize(f, p->sz);
+	p->pmin = ft_pad(*str, f, *sz, p->fldsize);
+	p->padded = 0;
+	p->pad[0] = 'r';
+	p->pad[1] = ' ';
+	if (f->width && f->width->min > p->fldsize)
+	{
+		if (f->flags && (f->flags->zero || f->flags->minus))
+			((f->flags->minus) ? (p->pad[0] = 'l')
+			: (p->pad[1] = '0'));
+		if (p->pad[0] == 'r' && p->pad[1] == ' '
+			&& !(p->padded) && (p->padded = 1))
+			ft_prepend(p->pad[1], p->pmin, written);
+	}
+	return (p);
+}
+
 void	ft_padandprint(char **str, t_format **f, int *written, int *sz)
 {
-	int		fldsize;
-	int		pmin;
-	int		padded;
-	char	pad[2];
+	t_pad	*p;
 
-	if (!*f || !written)
+	if (!(p = ft_initpad(str, *f, written, sz)))
 		return ;
-	fldsize = ft_fldsize(*f, *sz);
-	pmin = ft_pad(*str, *f, *sz, fldsize);
-	padded = 0;
-	pad[0] = 'r';
-	pad[1] = ' ';
-	//printf("size %d pmin %d fldsize %d\n", *sz, pmin, fldsize);
-	if ((*f)->width && (*f)->width->min > fldsize)
-	{
-		if ((*f)->flags && ((*f)->flags->zero || (*f)->flags->minus))
-			(((*f)->flags->minus) ? (pad[0] = 'l') 
-			 : (pad[1] = '0'));
-		if (pad[0] == 'r' && pad[1] == ' ' && !padded && (padded = 1))
-			ft_prepend(pad[1], pmin, written);
-	}
-
 	ft_printsign(str, f, written);
-	if (*((*f)->type) == 'p')
-		ft_prepend('x', 2, written);
-	if (pad[0] == 'r' && pad[1] == '0' && ft_tolower(*((*f)->type)) != 'x'
-	&& !padded && (padded = 1))
-		ft_prepend(pad[1], pmin, written);
-	if ((*f)->flags && (*f)->flags->hash && *(*str) != '0' 
-		&& ft_tolower(*((*f)->type)) != 'c')
-		ft_prepend(*((*f)->type), 1, written);
-	if ((ft_isnumeric(*((*f)->type)) || *((*f)->type) == 'p') && (fldsize > *sz 
-	|| ((*f)->flags && (*f)->flags->zero && pmin && !padded && (padded = 1))))	
-		((fldsize > *sz) ? (ft_prepend('0', fldsize - *sz, written)) 
-		: (ft_prepend('0', pmin, written)));
-	((ft_issigned(*((*f)->type)) && *(*str) == '-' && *sz) 
-	 ? write(1, *str + 1, *sz) : write(1, *str, *sz));
+	((*((*f)->type) == 'p') ? ft_prepend('x', 2, written) : 0);
+	((p->pad[0] == 'r' && p->pad[1] == '0' && ft_tolower(*((*f)->type)) != 'x'
+	&& !(p->padded) && (p->padded = 1))
+	? ft_prepend(p->pad[1], p->pmin, written) : 0);
+	(((*f)->flags && (*f)->flags->hash && *(*str) != '0'
+	&& ft_tolower(*((*f)->type)) != 'c')
+	? ft_prepend(*((*f)->type), 1, written) : 0);
+	if ((ft_isnumeric(*((*f)->type)) || *((*f)->type) == 'p')
+	&& (p->fldsize > *sz || ((*f)->flags && (*f)->flags->zero && p->pmin
+	&& !(p->padded) && (p->padded = 1))))
+		((p->fldsize > *sz) ? (ft_prepend('0', p->fldsize - *sz, written))
+		: (ft_prepend('0', p->pmin, written)));
+	((ft_issigned(*((*f)->type)) && *(*str) == '-' && *sz)
+	? write(1, *str + 1, *sz) : write(1, *str, *sz));
 	*written += *sz;
-	if ((*f)->width && (*f)->width->min > fldsize 
-			&& pad[0] == 'l' && !padded && (padded = 1))
-		ft_prepend(pad[1], pmin, written);
+	(((*f)->width && (*f)->width->min > p->fldsize
+	&& p->pad[0] == 'l' && !(p->padded) && (p->padded = 1))
+	? ft_prepend(p->pad[1], p->pmin, written) : 0);
+	free(p);
 }
-/*
-int		main()
-{
-	//int written = 0;
-	//char str = ' ';
-	//ft_prepend(str, 5, &written);
-	//printf("%d\n", written);
-	//printf("%-4d\n", size(str));
-	t_format *f = ft_memalloc(sizeof(t_format));
-	f->width = ft_memalloc(sizeof(t_width));
-	f->flags = ft_memalloc(sizeof(t_flags));
-	f->width->min = 14;
-	f->width->max = 10;
-	int size = 11;
-	f->type = "o";
-	f->flags->hash = 1;
-	char *str = "-65";
-	printf("fldsize : %d", ft_fldsize(f, size));
-	printf("pad : %d", ft_pad(str, f, size, ft_fldsize(f, size)));
-	return (0);
-}
-*/

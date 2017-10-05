@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 21:22:09 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/07/19 20:03:30 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/26 19:46:11 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void				ft_putendl_fd(char const *s, int fd);
 size_t				ft_strlen(const char *s);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_wstrlen(wchar_t *s);
+int					ft_putc(char c);
 int					ft_nbrsize(int number, int base);
 int					ft_nbrssize(intmax_t number, int base);
 int					ft_nbrusize(uintmax_t number, int base);

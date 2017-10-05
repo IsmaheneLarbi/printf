@@ -6,7 +6,7 @@
 /*   By: ilarbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 23:21:20 by ilarbi            #+#    #+#             */
-/*   Updated: 2017/06/29 17:36:46 by ilarbi           ###   ########.fr       */
+/*   Updated: 2017/08/27 21:00:32 by ilarbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ char	*ft_itoa_base(int number, int base)
 	i = 0;
 	size = ft_nbrsize(number, base);
 	if (base == 10 && number == INT_MIN)
-	{
-		result = ft_strdup("-2147483648");
-		return (result);
-	}
+		return ((result = ft_strdup("-2147483648")));
 	if (base == 10 && number < 0 && (flag = 1))
 		number *= (-1);
 	if (!(result = ft_strnew(size)))
